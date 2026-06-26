@@ -1788,11 +1788,9 @@ do
             end
         end
 
-        local function readBit(prob)
-            if type(prob) ~= "number" then prob = 128 end
+        local function readBit(self, prob)
             prob = prob or 128
             local split = 1 + math.floor(((range - 1) * prob) / 256)
-            if type(split) ~= "number" then split = 1 end
             local bit
             if value < split * 256 then
                 range = split
@@ -1806,16 +1804,19 @@ do
             return bit
         end
 
-        local function readBits(n)
+        local function readBits(self, n)
+            if type(n) ~= "number" then n = 0 end
             if n == 0 then return 0 end
+            if n > 32 then n = 32 end
+            if n < 0 then n = 0 end
             local v = 0
-            for _ = 1, n do v = (v * 2) + readBit(128) end
+            for _ = 1, n do v = (v * 2) + readBit(self, 128) end
             return v
         end
 
-        local function readSignedBits(n)
-            local mag = readBits(n)
-            if readBit(128) == 1 then mag = -mag end
+        local function readSignedBits(self, n)
+            local mag = readBits(self, n)
+            if readBit(self, 128) == 1 then mag = -mag end
             return mag
         end
 
