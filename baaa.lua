@@ -2345,7 +2345,7 @@ end
 ----------------------------------------------------------------------
 do
     local NATIVE = { png = true, bmp = true, gif = true, tga = true, ico = true,
-                     jpg = true, jpeg = true, webp = true }
+                     jpg = true, jpeg = true }
     local PROXY  = {
         avif = true,
         heif = true, heic = true, psd = true, psb = true,
@@ -2353,6 +2353,7 @@ do
         tif = true, tiff = true,
         raw = true, dng = true, cr2 = true, cr3 = true,
         nef = true, arw = true, orf = true, rw2 = true, pef = true,
+        webp = true,
     }
 
     function PNG.DetectFileType(data)
