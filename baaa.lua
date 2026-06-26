@@ -1789,8 +1789,10 @@ do
         end
 
         local function readBit(prob)
+            if type(prob) ~= "number" then prob = 128 end
             prob = prob or 128
             local split = 1 + math.floor(((range - 1) * prob) / 256)
+            if type(split) ~= "number" then split = 1 end
             local bit
             if value < split * 256 then
                 range = split
